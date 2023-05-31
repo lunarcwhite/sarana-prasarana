@@ -58,8 +58,7 @@ class KategoriController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
+    public function show(string $id){
         $data['kategori'] = $this->getOneKategori($id);
         return view('admin.kategori.show')->with($data);
     }

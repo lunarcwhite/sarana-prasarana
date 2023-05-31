@@ -71,6 +71,7 @@
 
     @include('layouts.scripts.sweetalert')
     @stack('js')
+    @include('layouts.scripts.image-preview-js')
     <script>
         function clearInput(formId, label = "", action = "") {
             document.getElementById(formId).reset();
@@ -81,42 +82,8 @@
                 `{{ url('${action}') }}`;
             $("#update").empty();
             $('.image-preview').empty();
+            $(".gambar").empty();
             $(".kapilih").removeAttr('selected');
-        }
-
-        function formConfirmation(message) {
-            var form = event.target.form;
-            Swal.fire({
-                title: message,
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                }
-            })
-        }
-
-        function updateConfirmation(id, message) {
-            var formUpdate = $(`${id}`);
-            console.log();
-            Swal.fire({
-                title: message,
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    formUpdate.submit();
-                }
-            })
         }
     </script>
 </body>
