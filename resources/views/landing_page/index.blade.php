@@ -75,7 +75,7 @@
                                                 class="d-flex justify-content-between mt-3 border-bottom border-100 py-2">
                                                 <span
                                                     class="badge bg-soft-info rounded-1 text-info fw-normal p-2">{{ $item->kategori->nama_kategori }}</span>
-                                                <p class="mb-0 text-500">{!! $item->status_tersedia === "1" ? 'Tersedia' : 'Dipinjam'!!}</p>
+                                                <p class="mb-0 text-500">{!! $item->status_tersedia == 1 ? 'Tersedia' : 'Dipinjam'!!}</p>
                                             </div>
                                             <h3 class="fw-normal fs-lg-1 fs-xxl-2 lh-sm mt-3">
                                                 {{ $item->nama_sarana_prasarana }}</h3>

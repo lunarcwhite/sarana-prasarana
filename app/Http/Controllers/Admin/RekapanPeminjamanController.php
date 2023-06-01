@@ -12,7 +12,8 @@ class RekapanPeminjamanController extends Controller
     public function index(Request $request)
     {
         if($request->filled('tanggal')) {
-            $data['rekapans'] = RekapanPeminjaman::whereDate('created_at', $request->get('tanggal'))->get();
+            $date = explode('-', $request->tanggal);
+            $data['rekapans'] = RekapanPeminjaman::whereMonth('created_at', $date[1])->whereYear('created_at', $date[0])->get();
             return view('admin.rekapan_peminjaman.index')->with($data);
         }else{
             $data['rekapans'] = RekapanPeminjaman::all();
@@ -27,7 +28,8 @@ class RekapanPeminjamanController extends Controller
             $rekapans = RekapanPeminjaman::all();
             $pdf = PDF::loadview('admin.rekapan_peminjaman.print', ['rekapans' => $rekapans]);
         }else{
-            $rekapans = RekapanPeminjaman::whereDate('created_at', $tanggal)->get();
+            $date = explode('-', $request->tanggal);
+            $rekapans = RekapanPeminjaman::whereMonth('created_at', $date[1])->whereYear('created_at', $date[0])->get();
             $pdf = PDF::loadview('admin.rekapan_peminjaman.print', ['rekapans' => $rekapans]);
         }
         return $pdf->download('rekap_peminjaman_'.$tanggal.'.pdf');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use App\Models\RekapanPeminjaman;
+use App\Models\SaranaPrasarana;
 
 class PeminjamanController extends Controller
 {
@@ -125,15 +126,21 @@ class PeminjamanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Peminjaman $peminjaman)
+    public function update(Request $request)
     {
         $id = $request->id;
+        $peminjaman = Peminjaman::where('id', $id)->first();
         $status = $request->status_peminjaman;
         try {
             $peminjaman->where('id', $id)->update([
                 'status_peminjaman' => $status,
                 'keterangan' => $request->keterangan
             ]);
+            if($status == 1){
+                SaranaPrasarana::where('id', $peminjaman->sarana_prasarana_id)->update([
+                    'status_tersedia' => 0  
+                ]);
+            }
             return redirect()
             ->back()
             ->with($this->notifikasi('success','Aksi Berhasil Dilakukan'));

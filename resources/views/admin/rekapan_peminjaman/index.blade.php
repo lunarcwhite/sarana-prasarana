@@ -26,7 +26,7 @@
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Filter Sesuai Tanggal</label>
                             <div class="col-sm-2">
-                                <input type="date" class="form-control" id="tanggal" name='tanggal'>
+                                <input type="month" class="form-control" id="tanggal" name='tanggal'>
                                 <br/>
                                 <a href="{{ route('dashboard.rekapan.index') }}" class="btn btn-sm btn-secondary"
                                     rel="noopener noreferrer">
