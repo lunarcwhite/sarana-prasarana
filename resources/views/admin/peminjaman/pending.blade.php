@@ -25,6 +25,7 @@
                             <th>Peminjam</th>
                             <th>Tanggal Untuk Peminjaman</th>
                             <th>Durasi Peminjaman</th>
+                            <th>Jumlah Pinjam</th>
                             <TH>Aksi</TH>
                         </thead>
                         <tbody>
@@ -35,6 +36,7 @@
                                     <td>{{ $peminjaman->user->username }}</td>
                                     <td>{{ $peminjaman->tanggal_mulai_peminjaman }}</td>
                                     <td>{{ $peminjaman->durasi_peminjaman }} Hari</td>
+                                    <td>{{ $peminjaman->jumlah_pinjam }}</td>
                                     <td>
                                         <form action="{{ route('dashboard.peminjaman.persetujuan', $peminjaman->id) }}"
                                             id="formPersetujuan" method="post">
@@ -43,6 +45,7 @@
                                             <input type="hidden" name="status_peminjaman" id="status_peminjaman">
                                             <input type="hidden" name="id" id="id">
                                             <input type="hidden" name="keterangan" id="keterangan">
+                                            <input type="hidden" name="jumlah_pinjam" id="jumlah_pinjam" value="{{$peminjaman->jumlah_pinjam}}">
                                             <button type="button" class="btn btn-success"
                                                 onclick="persetujuan('{{ $peminjaman->id }}','#formPersetujuan','1','Setujui Peminjaman?')">Setujui</button>
                                             <button type="button" class="btn btn-danger"
@@ -74,7 +77,7 @@
             })
             if (text) {
                 $("#keterangan").val(text);
-                persetujuan(idData,'#formPersetujuan','0','Tolak Peminjaman?')
+                persetujuan(idData, '#formPersetujuan', '0', 'Tolak Peminjaman?')
             }
         }
 

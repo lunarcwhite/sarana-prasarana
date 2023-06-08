@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('tanggal_mulai_peminjaman');
             $table->integer('durasi_peminjaman');
             $table->date('tanggal_pengembalian');
+            $table->integer('jumlah_pinjam')->default('1');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')

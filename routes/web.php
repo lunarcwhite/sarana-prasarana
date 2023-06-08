@@ -11,8 +11,9 @@ use App\Http\Controllers\UserSettingsController;
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\SaranaPrasaranaController;
 use App\Http\Controllers\Admin\RekapanPeminjamanController;
+use App\Http\Controllers\Admin\KelolaPeminjamanController;
+use App\Http\Controllers\User\PeminjamanController;
 use App\Http\Controllers\LandingPageController;
-use App\Http\Controllers\PeminjamanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,7 +60,7 @@ Route::middleware('revalidate')->group(function () {
                 Route::middleware('admin')->group(function () {
                     Route::resource('kategori', KategoriController::class)->except('create');
                     Route::resource('sarana_prasarana', SaranaPrasaranaController::class)->except('create', 'show');
-                    Route::controller(PeminjamanController::class)->group(function () {
+                    Route::controller(KelolaPeminjamanController::class)->group(function () {
                         Route::get('/pinjam/pending', 'pending')->name('peminjaman.pending');
                         Route::get('/pinjam/ditolak', 'ditolak')->name('peminjaman.ditolak');
                         Route::get('/pinjam/berlangsung', 'berlangsung')->name('peminjaman.berlangsung');
@@ -81,10 +82,8 @@ Route::middleware('revalidate')->group(function () {
                 });
             });
         });
-        Route::middleware('user')->group(function () {
-            Route::controller(PeminjamanController::class)->group(function () {
-                Route::post('/pinjam/store', 'store')->name('pinjam.store');
-            });
+        Route::controller(PeminjamanController::class)->group(function () {
+            Route::post('/pinjam/store', 'store')->name('pinjam.store');
         });
     });
     Route::controller(LandingPageController::class)->group(function () {

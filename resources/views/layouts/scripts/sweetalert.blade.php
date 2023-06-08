@@ -61,7 +61,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.10/dist/sweetalert2.all.min.js
         @endphp
         Swal.fire({
             title: 'Error',
-            html: "{!! $message !!}",
+            html: `{!! $message !!}`,
             icon: 'error',
         })
     @endif

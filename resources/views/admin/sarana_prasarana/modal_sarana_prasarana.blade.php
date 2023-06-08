@@ -20,9 +20,9 @@
                             placeholder="Nama Sarana & Prasarana" class="form-control" />
                     </div>
                     <div class="form-group mt-1">
-                        <label for="email">Jumlah: </label>
+                        <label for="email">Stok: </label>
                         <input id="jumlah" type="text" name="jumlah"
-                            placeholder="Jumlah" class="form-control" />
+                            placeholder="Stok" class="form-control" />
                     </div>
                     <div class="form-group mt-1">
                         <label for="email">Tipe Sarana Atau Prasarana: </label>

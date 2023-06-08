@@ -82,7 +82,7 @@
                                             @if (Route::has('login'))
                                                 @auth
                                                     <button type="button" class="btn-sm btn-rounded btn-primary text-dark"
-                                                        onclick="document.getElementById('sarana_prasarana_id').value ='{{ $item->id }}'"
+                                                        onclick="document.getElementById('sarana_prasarana_id').value ='{{ $item->id }}';document.getElementById('jumlah_teredia').value = '{{$item->jumlah}}'"
                                                         data-toggle="modal" data-target="#modalPinjam">Pinjam</button>
                                                 @else
                                                     <button type="button" class="btn-sm btn-rounded btn-primary text-dark"

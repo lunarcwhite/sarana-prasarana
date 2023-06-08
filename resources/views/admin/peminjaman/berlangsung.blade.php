@@ -25,6 +25,7 @@
                             <th>Peminjam</th>
                             <th>Tanggal Peminjaman</th>
                             <th>Durasi Peminjaman</th>
+                            <th>Jumlah Pinjam</th>
                             <TH>Aksi</TH>
                         </thead>
                         <tbody>
@@ -35,6 +36,7 @@
                                     <td>{{ $peminjaman->user->username}}</td>
                                     <td>{{$peminjaman->tanggal_mulai_peminjaman}}</td>
                                     <td>{{$peminjaman->durasi_peminjaman}} Hari</td>
+                                    <td>{{$peminjaman->jumlah_pinjam}}</td>
                                     <td>
                                         <form action="{{ route('dashboard.peminjaman.selesai', $peminjaman->id) }}"
                                             id="formSelesai" method="post">

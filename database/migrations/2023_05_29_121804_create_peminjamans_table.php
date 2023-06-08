@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('tanggal_pengembalian')->nullable();
             $table->char('status_peminjaman', 1)->default('2');
             $table->text('keterangan')->nullable();
+            $table->integer('jumlah_pinjam')->default('1');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')

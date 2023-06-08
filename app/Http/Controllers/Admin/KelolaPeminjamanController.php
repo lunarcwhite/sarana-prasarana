@@ -1,17 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use App\Models\RekapanPeminjaman;
 use App\Models\SaranaPrasarana;
 
-class PeminjamanController extends Controller
+class KelolaPeminjamanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function notifikasi($type, $message)
     {
         return [
@@ -58,72 +56,7 @@ class PeminjamanController extends Controller
             ->with($this->notifikasi('error',$th->getMessage()));
         }
     }
-
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $validate = $request->validate([
-            'tanggal_mulai_peminjaman' => 'required',
-            'durasi_peminjaman' => 'required|integer'
-        ]);
-
-        $data['tanggal_mulai_peminjaman'] = $request->tanggal_mulai_peminjaman;
-        $data['durasi_peminjaman'] = $request->durasi_peminjaman;
-        $data['user_id'] = auth()->user()->id;
-        $data['sarana_prasarana_id'] = $request->sarana_prasarana_id;
-        $data['tanggal_pengajuan_peminjaman'] = date('Y-m-d');
-        $data['status_peminjaman'] = 2;
-        if($data['tanggal_mulai_peminjaman'] < date('Y-m-d')){
-
-            return redirect()
-            ->back()
-            ->with($this->notifikasi('error','Tanggal Pengajuan Tidak Bisa Kurang Dari Tanggal Hari Ini'));
-        }else if(auth()->user()->role_id == 1){
-            return redirect()
-            ->back()
-            ->with($this->notifikasi('error', 'Akun Admin Tidak Dapat '));
-        }
-        try {
-            $peminjaman = new Peminjaman;
-            $peminjaman::create($data);
-            return redirect()
-            ->back()
-            ->with($this->notifikasi('success', 'Pengajuan Peminjaman Berhasil Dibuat'));
-        } catch (\Throwable $th) {
-            return redirect()
-            ->back()
-            ->with($this->notifikasi('error',$th->getMessage()));
-        }
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Peminjaman $peminjaman)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Peminjaman $peminjaman)
-    {
-        //
-    }
-
-    /**
+      /**
      * Update the specified resource in storage.
      */
     public function update(Request $request)
@@ -137,8 +70,9 @@ class PeminjamanController extends Controller
                 'keterangan' => $request->keterangan
             ]);
             if($status == 1){
-                SaranaPrasarana::where('id', $peminjaman->sarana_prasarana_id)->update([
-                    'status_tersedia' => 0  
+                $sarana = SaranaPrasarana::where('id', $peminjaman->sarana_prasarana_id)->first(); 
+                $sarana->where('id', $peminjaman->sarana_prasarana_id)->update([
+                    'jumlah' => $sarana->jumlah - $request->jumlah_pinjam
                 ]);
             }
             return redirect()
@@ -152,7 +86,7 @@ class PeminjamanController extends Controller
         }
     }
 
-    /**
+        /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)

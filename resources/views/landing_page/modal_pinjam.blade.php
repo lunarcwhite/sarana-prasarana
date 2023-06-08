@@ -22,6 +22,16 @@ aria-labelledby="myModalLabel33" aria-hidden="true">
                     <input type="number" class="form-control" name="durasi_peminjaman"
                         placeholder="3 Hari" />
                 </div>
+                <div class="form-group mt-3">
+                    <label for="judul">Stok Tersedia</label>
+                    <input type="number" disabled class="form-control" id="jumlah_teredia"
+                        placeholder="3 Hari" />
+                </div>
+                <div class="form-group mt-3">
+                    <label for="judul">Jumlah Barang Dipinjam</label>
+                    <input type="number" class="form-control" name="jumlah_pinjam"
+                        value="1" />
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn-sm btn-rounded btn-secondary"
