@@ -1,10 +1,10 @@
 @extends('layouts.admin.master')
 @section('pageTitle')
-    Data Sarana & Prasarana
+Kelola Sarana & Prasarana
 
 @stop
 @section('pageLink')
-    Sarana & Prasarana
+   Kelola Sarana & Prasarana
 @stop
 @section('content')
     <!-- Row -->

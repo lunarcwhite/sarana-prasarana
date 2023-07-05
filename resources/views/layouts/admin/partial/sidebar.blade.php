@@ -20,24 +20,24 @@
     <li class="nav-item">
         <a href="{{ route('dashboard.kategori.index') }}" class="nav-link">
             <i class="fa fa-tags" aria-hidden="true"></i>
-            <span>Kategori</span>
+            <span>Kelola Kategori</span>
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{route('dashboard.sarana_prasarana.index')}}">
             <i class="fa fa-database" aria-hidden="true"></i>
-            <span>Sarana Prasarana</span>
+            <span>Kelola Sarana Prasarana</span>
         </a>
     </li>
     <hr class="sidebar-divider">
     <div class="sidebar-heading">
-        Examples
+        Menu
     </div>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage"
             aria-expanded="true" aria-controls="collapsePage">
             <i class="fas fa-fw fa-columns"></i>
-            <span>Peminjaman</span>
+            <span>Kelola Peminjaman</span>
         </a>
         <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">

@@ -1,10 +1,10 @@
 @extends('layouts.admin.master')
 @section('pageTitle')
-    Data Kategori
+Kelola Kategori
 
 @stop
 @section('pageLink')
-    Kategori
+   Kelola Kategori
 @stop
 @section('content')
     <!-- Row -->

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\SaranaPrasarana;
 use Illuminate\Http\Request;
 use App\Models\Kategori;
-use Carbon\Carbon;
 use Storage;
 
 class SaranaPrasaranaController extends Controller
@@ -59,7 +58,7 @@ class SaranaPrasaranaController extends Controller
     
             if ($request->hasFile('photo')) {
                 $extension = $foto->extension();
-                $filename = 'photo_' . $request->nama_sarana_prasarana .'_'.$request->tipe .'_' . Carbon::now() . '.' . $extension;
+                $filename = 'photo_' . $request->nama_sarana_prasarana .'_'.$request->tipe .'_' . time() . '.' . $extension;
                 $foto->storeAs('public/images/'.$request->tipe, $filename);
                 $fotoDb = $filename;
             } else {
@@ -76,14 +75,9 @@ class SaranaPrasaranaController extends Controller
                 ->back()
                 ->with($notification);
         } catch (\Throwable $th) {
-            
-            $notification = [
-                'alert-type' => 'error',
-                'message' => 'Gagal. Coba Ulangi',
-            ];
             return redirect()
                 ->back()
-                ->with($notification);
+                ->withErrors('Gagal menambahkan!');
         }
     }
 
@@ -123,7 +117,7 @@ class SaranaPrasaranaController extends Controller
                     Storage::delete('public/images/'.$saranaPrasarana->tipe.'/'.$saranaPrasarana->photo);
                 }
                 $extension = $foto->extension();
-                $filename = 'photo_' . $request->nama_sarana_prasarana .'_'.$request->tipe .'_' . Carbon::now() . '.' . $extension;
+                $filename = 'photo_' . $request->nama_sarana_prasarana .'_'.$request->tipe .'_' . time() . '.' . $extension;
                 $foto->storeAs('public/images/'.$request->tipe, $filename);
                 $fotoDb = $filename;
                 
@@ -141,15 +135,9 @@ class SaranaPrasaranaController extends Controller
                 ->back()
                 ->with($notification);
         } catch (\Throwable $th) {
-            dd( $th);
-            
-            $notification = [
-                'alert-type' => 'error',
-                'message' => 'Gagal. Coba Ulangi',
-            ];
             return redirect()
                 ->back()
-                ->with($notification);
+                ->withErrors('Gagal memperbarui!');
         }
     }
 
@@ -171,7 +159,9 @@ class SaranaPrasaranaController extends Controller
                 ->back()
                 ->with($notification);
         } catch (\Throwable $th) {
-            dd($th);
+            return redirect()
+            ->back()
+            ->withErrors('Gagal menghapus!');
         }
     }
 }

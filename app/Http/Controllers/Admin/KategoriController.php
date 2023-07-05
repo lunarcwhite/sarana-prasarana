@@ -44,8 +44,8 @@ class KategoriController extends Controller
         $validate = $request->validate([
             'nama_kategori' => 'unique:kategoris,nama_kategori',
         ]);
-
-        Kategori::create($request->all());
+        try {
+            Kategori::create($request->all());
         $notification = [
             'alert-type' => 'success',
             'message' => 'Berhasil Menambah Kategori',
@@ -53,6 +53,12 @@ class KategoriController extends Controller
         return redirect()
             ->back()
             ->with($notification);
+        } catch (\Throwable $th) {
+            return redirect()
+            ->back()
+            ->withErrors('Gagal menambahkan!');
+        }
+        
     }
 
     /**
@@ -79,7 +85,8 @@ class KategoriController extends Controller
         $validate = $request->validate([
             'nama_kategori' => 'unique:kategoris,nama_kategori',
         ]);
-        $this->getOneKategori($id)->update($request->all());
+        try {
+            $this->getOneKategori($id)->update($request->all());
         $notification = [
             'alert-type' => 'success',
             'message' => 'Update Berhasil',
@@ -87,6 +94,12 @@ class KategoriController extends Controller
         return redirect()
             ->back()
             ->with($notification);
+        } catch (\Throwable $th) {
+            return redirect()
+            ->back()
+            ->withErrors('Gagal memperbarui!');
+        }
+        
     }
 
     /**
@@ -94,13 +107,20 @@ class KategoriController extends Controller
      */
     public function destroy(string $id)
     {
-        $this->getOneKategori($id)->delete();
-        $notification = [
-            'alert-type' => 'success',
-            'message' => 'Berhasil Menghapus',
-        ];
-        return redirect()
+        try {
+            $this->getOneKategori($id)->delete();
+            $notification = [
+                'alert-type' => 'success',
+                'message' => 'Berhasil Menghapus',
+            ];
+            return redirect()
+                ->back()
+                ->with($notification);
+        } catch (\Throwable $th) {
+            return redirect()
             ->back()
-            ->with($notification);
+            ->withErrors('Gagal menghapus!');
+        }
+       
     }
 }
