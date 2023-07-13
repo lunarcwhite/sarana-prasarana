@@ -10,6 +10,8 @@
                     aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
+            <a href="{{url('template/template_import_akun.xlsx')}}" class="btn btn-info">Download Template</a>
+            <hr/>
                 <form action="{{ route('dashboard.akun.import') }}" method="post" id="formImport" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group mt-1">

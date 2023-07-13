@@ -22,9 +22,6 @@
                             class="btn btn-success" data-toggle="modal" data-target="#modalImport">
                             Import
                         </button>
-                        <a href="{{url('template/template_import_akun.xlsx')}}" class="btn btn-secondary" >
-                            Download Template
-                        </a>
                     </div>
                     <a href="{{ url()->previous() }}" class="btn btn-primary">
                         Kembali
