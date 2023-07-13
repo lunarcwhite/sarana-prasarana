@@ -33,7 +33,7 @@
                                 <tr>
                                     <td>{{ $no + 1 }}</td>
                                     <td>{{ $peminjaman->sarana_prasarana->nama_sarana_prasarana }}</td>
-                                    <td>{{ $peminjaman->user->username}}</td>
+                                    <td>{{ $peminjaman->user->nama_akun}}</td>
                                     <td>{{$peminjaman->tanggal_mulai_peminjaman}}</td>
                                     <td>{{$peminjaman->keterangan}} Hari</td>
                                     <td>{{$peminjaman->jumlah_pinjam}}</td>

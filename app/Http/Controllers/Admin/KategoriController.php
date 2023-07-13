@@ -83,7 +83,7 @@ class KategoriController extends Controller
     public function update(Request $request, string $id)
     {
         $validate = $request->validate([
-            'nama_kategori' => 'unique:kategoris,nama_kategori',
+            'nama_kategori' => 'required',
         ]);
         try {
             $this->getOneKategori($id)->update($request->all());

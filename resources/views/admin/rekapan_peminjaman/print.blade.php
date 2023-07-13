@@ -11,7 +11,7 @@
 
 <body>
     <div class="table-responsive p-3">
-        <table class="table align-items-center table-flush table-hover">
+        <table class="table align-items-center table-flush table-hover" style="font-size: 12pt">
             <thead class="thead-light">
                 <th>No</th>
                 <th>Nama Sarana & Prasarana</th>
@@ -19,6 +19,8 @@
                 <th>Tanggal Peminjaman</th>
                 <th>Durasi Peminjaman</th>
                 <th>Tanggal Pengembalian</th>
+                <th>Kondisi Awal</th>
+                <th>Kondisi Pengembalian</th>
                 <TH>Status</TH>
             </thead>
             <tbody>
@@ -30,6 +32,8 @@
                         <td>{{ $rekapan->tanggal_mulai_peminjaman }}</td>
                         <td>{{ $rekapan->durasi_peminjaman }} Hari</td>
                         <td>{{ $rekapan->tanggal_pengembalian }}</td>
+                        <td>{{$rekapan->kondisi_awal}}</td>
+                        <td>{{$rekapan->kondisi_pengembalian}}</td>
                         <td><span class="badge badge-sm badge-success">Selesai</span>
                         </td>
                     </tr>

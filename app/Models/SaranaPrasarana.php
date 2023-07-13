@@ -15,4 +15,8 @@ class SaranaPrasarana extends Model
     {
         return $this->belongsTo(Kategori::class, 'kategori_id', 'id');
     }
+    public function rekapan()
+    {
+        return $this->hasMany(RekapanPeminjaman::class, 'sarana_prasarana_id');
+    }
 }

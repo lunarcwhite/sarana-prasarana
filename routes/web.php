@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
@@ -12,7 +12,9 @@ use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\SaranaPrasaranaController;
 use App\Http\Controllers\Admin\RekapanPeminjamanController;
 use App\Http\Controllers\Admin\KelolaPeminjamanController;
+use App\Http\Controllers\Admin\KelolaAkunController;
 use App\Http\Controllers\User\PeminjamanController;
+use App\Http\Controllers\User\RiwayatPeminjamanController;
 use App\Http\Controllers\LandingPageController;
 
 /*
@@ -59,7 +61,11 @@ Route::middleware('revalidate')->group(function () {
                 });
                 Route::middleware('admin')->group(function () {
                     Route::resource('kategori', KategoriController::class)->except('create');
-                    Route::resource('sarana_prasarana', SaranaPrasaranaController::class)->except('create', 'show');
+                    Route::resource('sarana_prasarana', SaranaPrasaranaController::class)->except('create');
+                    Route::resource('akun', KelolaAkunController::class)->except('create', 'show');
+                    Route::controller(KelolaAkunController::class)->group(function () {
+                        Route::post('/akun/import', 'import')->name('akun.import');
+                    });
                     Route::controller(KelolaPeminjamanController::class)->group(function () {
                         Route::get('/pinjam/pending', 'pending')->name('peminjaman.pending');
                         Route::get('/pinjam/ditolak', 'ditolak')->name('peminjaman.ditolak');
@@ -71,6 +77,12 @@ Route::middleware('revalidate')->group(function () {
                     Route::controller(RekapanPeminjamanController::class)->group(function () {
                         Route::get('/rekapan', 'index')->name('rekapan.index');
                         Route::get('/rekapan/print', 'print')->name('rekapan.print');
+                    });
+                });
+                Route::middleware('user')->group(function () {
+                    Route::controller(RiwayatPeminjamanController::class)->group(function () {
+                        Route::get('/riwayat_peminjaman', 'riwayat')->name('user.riwayat_peminjaman');
+                        Route::get('/peminjaman_berlangsung', 'berlangsung')->name('user.peminjaman_berlangsung');
                     });
                 });
             });

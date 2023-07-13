@@ -33,6 +33,11 @@
                         </select>
                     </div>
                     <div class="form-group mt-1">
+                        <label for="email">Kondisi: </label>
+                        <input id="kondisi" type="text" name="kondisi"
+                            placeholder="Kondisi" class="form-control" />
+                    </div>
+                    <div class="form-group mt-1">
                         <label for="email">Kategori: </label>
                         <select name="kategori_id" id="kategori" class="form-control">
                             <option value=""> --> Pilih Kategori <--- </option>

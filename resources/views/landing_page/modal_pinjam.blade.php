@@ -5,7 +5,7 @@ aria-labelledby="myModalLabel33" aria-hidden="true">
         <div class="modal-header">
             <h4 class="modal-title" id="labelModal">Atur Tanggal Peminjaman
             </h4>
-            <button type="button" class="btn btn-outline-danger btn-close" data-dismiss="modal"
+            <button type="button" class="btn btn-outline-danger btn-close" data-bs-dismiss="modal"
                 aria-label="Close"><span aria-hidden="true"></span></button>
         </div>
         <form action="{{ route('pinjam.store') }}" method="post">
@@ -28,15 +28,15 @@ aria-labelledby="myModalLabel33" aria-hidden="true">
                         placeholder="3 Hari" />
                 </div>
                 <div class="form-group mt-3">
-                    <label for="judul">Jumlah Barang Dipinjam</label>
+                    <label for="judul">Jumlah Dipinjam</label>
                     <input type="number" class="form-control" name="jumlah_pinjam"
                         value="1" />
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn-sm btn-rounded btn-secondary"
+                <button type="button" class="btn btn-sm btn-rounded btn-secondary"
                     data-dismiss="modal">Batal</button>
-                <button type="button" onclick="formConfirmation('Pinjam Barang?')" class="btn-sm btn-rounded btn-primary">Pinjam</button>
+                <button type="button" onclick="formConfirmation('Pinjam Barang?')" class="btn btn-sm btn-rounded btn-primary">Pinjam</button>
             </div>
         </form>
     </div>

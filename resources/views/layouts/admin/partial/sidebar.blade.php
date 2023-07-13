@@ -1,5 +1,5 @@
 <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard.') }}">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('landing') }}">
         <div class="sidebar-brand-icon">
             <img src="{{asset('img/logo/logo2.png')}}">
         </div>
@@ -17,6 +17,12 @@
     <div class="sidebar-heading">
         <span class="text-dark"> Master Data</span>
     </div>
+    <li class="nav-item">
+        <a href="{{ route('dashboard.akun.index') }}" class="nav-link">
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <span>Kelola Akun</span>
+        </a>
+    </li>
     <li class="nav-item">
         <a href="{{ route('dashboard.kategori.index') }}" class="nav-link">
             <i class="fa fa-tags" aria-hidden="true"></i>
@@ -51,6 +57,20 @@
         <a class="nav-link" href="{{route('dashboard.rekapan.index')}}">
             <i class="fa fa-history" aria-hidden="true"></i>
             <span>Rekapan Peminjaman</span>
+        </a>
+    </li>
+    @endcan
+    @can('user')
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('dashboard.user.peminjaman_berlangsung')}}">
+            <i class="fa fa-fw fa-columns" aria-hidden="true"></i>
+            <span>Peminjaman</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('dashboard.user.riwayat_peminjaman')}}">
+            <i class="fa fa-history" aria-hidden="true"></i>
+            <span>Riwayat Peminjaman</span>
         </a>
     </li>
     @endcan

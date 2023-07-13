@@ -50,7 +50,8 @@ class SaranaPrasaranaController extends Controller
             'nama_sarana_prasarana' => 'required|unique:sarana_prasaranas,nama_sarana_prasarana',
             'jumlah' => 'required|integer',
             'kategori_id' => 'required',
-            'photo' => 'image|mimes:jpeg,png,jpg,gif,svg'
+            'photo' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'kondisi' => 'required'
         ]);
 
         try {
@@ -86,7 +87,8 @@ class SaranaPrasaranaController extends Controller
      */
     public function show(SaranaPrasarana $saranaPrasarana)
     {
-        //
+        $data['saranaPrasarana'] = $this->getOneSaranaPrasarana($saranaPrasarana->id);
+        return view('admin.sarana_prasarana.show')->with($data);
     }
 
     /**
@@ -106,7 +108,8 @@ class SaranaPrasaranaController extends Controller
             'nama_sarana_prasarana' => 'required',
             'jumlah' => 'required|integer',
             'kategori_id' => 'required',
-            'photo' => 'image|mimes:jpeg,png,jpg,gif,svg'
+            'photo' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'kondisi' => 'required'
         ]);
 
         try {

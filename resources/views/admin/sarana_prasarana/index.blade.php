@@ -22,7 +22,7 @@ Kelola Sarana & Prasarana
                 </div>
 
                 <div class="table-responsive p-3">
-                    <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                    <table class="table align-items-center table-flush table-hover" id="dataTable">
                         <thead class="thead-light">
                             <th>No</th>
                             <th>Nama Sarana & Prasarana</th>
@@ -42,7 +42,7 @@ Kelola Sarana & Prasarana
                                             id="formDeleteSarana" method="post">
                                             @csrf
                                             @method('delete')
-                                            <a href="#"
+                                            <a href="{{route('dashboard.sarana_prasarana.show', $sarana_prasarana->id)}}"
                                                 class="btn btn-info">Lihat</a>
                                             <button type="button" class="btn btn-warning"
                                                 onclick="editSaranaPrasarana('{{ $sarana_prasarana->id }}','#modalSaranaPrasarana')">
@@ -75,6 +75,7 @@ Kelola Sarana & Prasarana
                     $(`#tipe option[value="${res.tipe}"]`).attr("selected", "selected").attr('class', 'kapilih');
                     $(`#kategori option[value="${res.kategori_id}"]`).attr("selected", "selected").attr('class', 'kapilih');
                     $("#jumlah").val(res.jumlah);
+                    $("#kondisi").val(res.kondisi);
                     if (res.photo === null) {
                         $(".gambar").append(`Belum Mengupload Gambar`);
                     } else {

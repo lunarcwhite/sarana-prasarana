@@ -22,33 +22,29 @@
                         <thead class="thead-light">
                             <th>No</th>
                             <th>Nama Sarana & Prasarana</th>
-                            <th>Peminjam</th>
                             <th>Tanggal Peminjaman</th>
                             <th>Durasi Peminjaman</th>
                             <th>Jumlah Pinjam</th>
-                            <TH>Aksi</TH>
+                            <th>Keterangan</th>
+                            <TH>Status</TH>
                         </thead>
                         <tbody>
                             @foreach ($peminjamans as $no => $peminjaman)
                                 <tr>
                                     <td>{{ $no + 1 }}</td>
                                     <td>{{ $peminjaman->sarana_prasarana->nama_sarana_prasarana }}</td>
-                                    <td>{{ $peminjaman->user->nama_akun}}</td>
                                     <td>{{$peminjaman->tanggal_mulai_peminjaman}}</td>
                                     <td>{{$peminjaman->durasi_peminjaman}} Hari</td>
                                     <td>{{$peminjaman->jumlah_pinjam}}</td>
+                                    <td>{{$peminjaman->keterangan}}</td>
                                     <td>
-                                        <form action="{{ route('dashboard.peminjaman.selesai', $peminjaman->id) }}"
-                                            id="formSelesai" method="post">
-                                            @csrf
-                                            <input type="hidden" name="id" id="id">
-                                            <input type="hidden" name="kondisi_pengembalian" id="kondisi_pengembalian">
-                                            <input type="hidden" name="kondisi_awal" value="{{$peminjaman->sarana_prasarana->kondisi}}" id="kondisi">
-                                            <input type="hidden" name="jumlah_pinjam" id="jumlah_pinjam" value="{{$peminjaman->jumlah_pinjam}}">
-                                            <input type="hidden" name="id_sarana" id="id_sarana" value="{{$peminjaman->sarana_prasarana->id}}">
-                                            <button type="button" class="btn btn-success"
-                                                onclick="selesai({{ $peminjaman->id }})">Selesai</button>
-                                        </form>
+                                        @if ($peminjaman->status_peminjaman == 1)
+                                        <span class="badge badge-sm badge-success">Berlangsung</span>
+                                        @elseif ($peminjaman->status_peminjaman == 2)
+                                        <span class="badge badge-sm badge-warning">Menunggu Persetujuan</span>
+                                        @else
+                                        <span class="badge badge-sm badge-danger">Ditolak</span>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

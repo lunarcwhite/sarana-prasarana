@@ -34,16 +34,24 @@ class KelolaPeminjamanController extends Controller
     }
     public function selesai(Request $request, $id)
     {
-        $status = $request->status_peminjaman;
+        $id = $request->id;
         $data_pinjam = Peminjaman::where('id', $id)->first();
+        $idSarana = $request->id_sarana;
+        $sarana = SaranaPrasarana::where('id', $idSarana)->first();
         try {
             $data = [
                 'user_id' => $data_pinjam->user_id,
                 'sarana_prasarana_id' => $data_pinjam->sarana_prasarana_id,
                 'tanggal_mulai_peminjaman' => date('Y-m-d'),
                 'durasi_peminjaman' => $data_pinjam->durasi_peminjaman,
-                'tanggal_pengembalian' => date('Y-m-d')
+                'tanggal_pengembalian' => date('Y-m-d'),
+                'kondisi_awal' => $request->kondisi_awal,
+                'kondisi_pengembalian' => $request->kondisi_pengembalian
             ];
+            SaranaPrasarana::where('id', $idSarana)->update([
+                'kondisi' => $request->kondisi_pengembalian,
+                'jumlah' => $request->jumlah_pinjam + $sarana->jumlah,
+            ]);
             RekapanPeminjaman::create($data);
             $data_pinjam->delete();
             return redirect()
@@ -53,7 +61,7 @@ class KelolaPeminjamanController extends Controller
         } catch (\Throwable $th) {
             return redirect()
             ->back()
-            ->with($this->notifikasi('error',$th->getMessage()));
+            ->with($this->notifikasi('error','Aksi Gagal!'));
         }
     }
       /**
