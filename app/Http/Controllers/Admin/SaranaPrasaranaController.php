@@ -127,7 +127,7 @@ class SaranaPrasaranaController extends Controller
             } else {
                 $fotoDb = null;
             }
-            $data = $request->all();
+            $data = $request->except('_token', '_method');
             $data['photo'] = $fotoDb;
             $saranaPrasarana->update($data);
             $notification = [

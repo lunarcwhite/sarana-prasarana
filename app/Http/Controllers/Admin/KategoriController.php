@@ -86,7 +86,8 @@ class KategoriController extends Controller
             'nama_kategori' => 'required',
         ]);
         try {
-            $this->getOneKategori($id)->update($request->all());
+            $update = $request->except('_token', '_method');
+            $this->getOneKategori($id)->update($update);
         $notification = [
             'alert-type' => 'success',
             'message' => 'Update Berhasil',
