@@ -19,10 +19,11 @@ class SaranaPrasaranaSeeder extends Seeder
         for ($i=0; $i < 20; $i++) { 
             $kategori = Kategori::inRandomOrder()->first();
             $data = [
-                'nama_sarana_prasarana' => 'barang-10'.$i+1,
+                'nama_sarana_prasarana' => 'sarana prasaran-'.$i+1,
                 'tipe' => $faker->randomElement(['Sarana', 'Prasarana']),
                 'kategori_id' => $kategori->id,
                 'jumlah' => rand(1, 99),
+                'kondisi' => 'bagus'
             ];
             SaranaPrasarana::create($data);
         }
