@@ -82,27 +82,37 @@ class KelolaAkunController extends Controller
             'password' => 'required'
         ]);
         try {
-            $input = $request->all();
+            $input = $request->except('_method', '_token');
             $password = 'gbghfd65#2w45' . $request->password . 'sdghgh^$^';
             $input['role_id'] = 2;
             $input['password'] = bcrypt($password);
             User::where('id',$id)->update($input);
-            $notification = [
-                'alert-type' => 'success',
-                'message' => 'Berhasil Menambahakan'
-            ];
-            return redirect()->back()->with($notification);
         } catch (\Throwable $th) {
-            return redirect()->back()->withErrors('Gagal menambahkan!');
+            return redirect()->back()->withErrors('Gagal Memperbarui!');
         }
+        $notification = [
+            'alert-type' => 'success',
+            'message' => 'Berhasil Memperbarui!'
+        ];
+        return redirect()->back()->with($notification);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(String $id)
     {
-        //
+        try {
+            User::where('id',$id)->delete();
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+            return redirect()->back()->withErrors('Tidak dapat menghapus akun, ada data yang terhubung!');
+        }
+        $notification = [
+            'alert-type' => 'success',
+            'message' => 'Berhasil Menghapus Akun!'
+        ];
+        return redirect()->back()->with($notification);
     }
 
     public function import(Request $request)

@@ -19,7 +19,7 @@ class LandingPageController extends Controller
         }elseif($request->filled('keyword') && $request->keyword != ''){
             $data['saranaPrasarana'] = SaranaPrasarana::where('nama_sarana_prasarana','LIKE', "%$request->keyword%")->orderBy('nama_sarana_prasarana','asc')->get();
         }else{
-            $data['saranaPrasarana'] = SaranaPrasarana::orderBy('nama_sarana_prasarana','asc')->get();
+            $data['saranaPrasarana'] = SaranaPrasarana::orderBy('nama_sarana_prasarana','asc')->paginate(10);
         }
         return view('landing_page.index')->with($data);
     }

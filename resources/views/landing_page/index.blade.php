@@ -131,6 +131,7 @@
                         <strong>Sarana Prasarana Tidak Ditemukan</strong>
                     @endif
                 </div>
+                {!! $saranaPrasarana->withQueryString()->links('pagination::bootstrap-5') !!}
             </div>
             <div class="col-md-3">
                 <div class="row">
