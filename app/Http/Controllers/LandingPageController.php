@@ -15,9 +15,9 @@ class LandingPageController extends Controller
         $data['queryKeyword'] = $request->keyword;
         if($request->filled('kategori')) {
             $kategori = Kategori::where('nama_kategori', $request->kategori)->first();
-            $data['saranaPrasarana'] = SaranaPrasarana::where('kategori_id', $kategori->id)->orderBy('nama_sarana_prasarana','asc')->get();
+            $data['saranaPrasarana'] = SaranaPrasarana::where('kategori_id', $kategori->id)->orderBy('nama_sarana_prasarana','asc')->paginate(10);
         }elseif($request->filled('keyword') && $request->keyword != ''){
-            $data['saranaPrasarana'] = SaranaPrasarana::where('nama_sarana_prasarana','LIKE', "%$request->keyword%")->orderBy('nama_sarana_prasarana','asc')->get();
+            $data['saranaPrasarana'] = SaranaPrasarana::where('nama_sarana_prasarana','LIKE', "%$request->keyword%")->orderBy('nama_sarana_prasarana','asc')->paginate(10);
         }else{
             $data['saranaPrasarana'] = SaranaPrasarana::orderBy('nama_sarana_prasarana','asc')->paginate(10);
         }
